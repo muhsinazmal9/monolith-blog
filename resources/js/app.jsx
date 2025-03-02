@@ -4,8 +4,20 @@ import { createInertiaApp } from '@inertiajs/inertia-react'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 
 createInertiaApp({
-    resolve: (name) => resolvePageComponent(`./Pages/${name}.jsx`,import.meta.glob('./Pages/**/*.jsx')),
-    setup({ el, App, props }) {
-        createRoot(el).render(<App {...props} />)
+    title: title => `${title} - ${appName}`,
+    resolve: function (name) {
+        console.log(name);
+        return resolvePageComponent(
+            `./Pages/${name}.jsx`,
+            import.meta.glob('./Pages/**/*.jsx')
+        );
     },
-})
+    setup({ el, App, props }) {
+        const root = createRoot(el);
+
+        root.render(<App {...props} />);
+    },
+    progress: {
+        color: '#F87415'
+    }
+});
