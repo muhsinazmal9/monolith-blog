@@ -13,10 +13,12 @@ export default function Layout({ children }) {
         <main>
             <header className='flex gap-4'>
                 {navigation.map((item, index) => (
-                    <a className='px-4 py-2 bg-gray-200' key={index} href={item.href}>
+                    <Link className='px-4 py-2 bg-gray-200' key={index} method="get" href={item.href}>
                         {item.name}
-                    </a>
+                    </Link>
                 ))}
+
+                {/* <Link href="/blogs" >Logout</Link> */}
             </header>
             <article>{children}</article>
         </main>
