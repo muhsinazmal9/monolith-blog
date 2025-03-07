@@ -1,5 +1,17 @@
 import { Link } from '@inertiajs/react'
 
+
+const removeHTMLTags = (htmlString) =>  {
+  // Create a new DOMParser instance
+  const parser = new DOMParser();
+  // Parse the HTML string
+  const doc = parser.parseFromString(htmlString, 'text/html');
+  // Extract text content
+  const textContent = doc.body.textContent || "";
+  // Trim whitespace
+  return textContent.trim();
+}
+
 const BlogCard = ({ blog }) => {
   return (
     <div className="overflow-hidden rounded-lg bg-white shadow-md transition-all duration-300 hover:shadow-lg">
@@ -33,8 +45,8 @@ const BlogCard = ({ blog }) => {
           
           <p className="text-sm text-gray-600">
             {blog.description.length > 120
-              ? blog.description.substring(0, 120) + '...'
-              : blog.description
+              ? removeHTMLTags(blog.description).substring(0, 120) + '...'
+              : removeHTMLTags(blog.description)
             }
           </p>
           
